@@ -1,0 +1,117 @@
+# Configuración de Equipos de Protección Personal (EPP)
+# Para planta de lixiviación química
+
+ppe_detection:
+  # EPPs obligatorios (siempre activos)
+  mandatory:
+    - name: "safety_glasses"
+      label: "Gafas de Seguridad"
+      enabled: true
+      confidence_threshold: 0.7
+      color: "#FFD700"  # Gold
+
+    - name: "safety_shoes"
+      label: "Zapatos de Seguridad"
+      enabled: true
+      confidence_threshold: 0.7
+      color: "#8B4513"  # Brown
+
+    - name: "protective_clothing"
+      label: "Traje/Cotona"
+      enabled: true
+      confidence_threshold: 0.65
+      variants:
+        - "overol_verde"      # Traje químico verde
+        - "cotona_blanca"     # Cotona blanca
+        - "cotona_azul"       # Cotona azul
+      color: "#00FF00"  # Green
+
+  # EPPs condicionales (activables según zona/tarea)
+  conditional:
+    - name: "chemical_mask"
+      label: "Mascarilla/Respirador Químico"
+      enabled: false  # Activar según necesidad
+      confidence_threshold: 0.75
+      color: "#FF0000"  # Red
+
+    - name: "chemical_gloves"
+      label: "Guantes Resistentes a Químicos"
+      enabled: false  # Activar según necesidad
+      confidence_threshold: 0.7
+      color: "#0000FF"  # Blue
+
+# Zonas de la planta con requerimientos específicos
+zones:
+  - zone_id: "zona_lixiviacion"
+    name: "Zona de Lixiviación Principal"
+    mandatory_ppe: ["safety_glasses", "safety_shoes", "protective_clothing"]
+    conditional_ppe: ["chemical_mask", "chemical_gloves"]
+
+  - zone_id: "zona_preparacion"
+    name: "Zona de Preparación de Reactivos"
+    mandatory_ppe: ["safety_glasses", "safety_shoes", "protective_clothing"]
+    conditional_ppe: ["chemical_mask", "chemical_gloves"]
+
+  - zone_id: "zona_almacen"
+    name: "Almacén de Químicos"
+    mandatory_ppe: ["safety_glasses", "safety_shoes", "protective_clothing"]
+    conditional_ppe: []
+
+  - zone_id: "zona_oficinas"
+    name: "Oficinas/Zona Administrativa"
+    mandatory_ppe: []
+    conditional_ppe: []
+
+# Configuración de alertas
+alerts:
+  missing_ppe:
+    enabled: true
+    cooldown_seconds: 30  # Evitar spam de alertas
+    severity: "high"
+
+  partial_compliance:
+    enabled: true
+    threshold: 0.5  # Alerta si menos del 50% usa EPP
+    severity: "medium"
+
+  unauthorized_access:
+    enabled: true
+    severity: "critical"
+
+# Configuración de modelo
+model:
+  input_size: [640, 640]  # Tamaño de entrada para YOLO
+  max_detections: 10      # Máximo de personas por frame
+  iou_threshold: 0.45     # Intersection over Union
+
+# Configuración de procesamiento de video
+video_processing:
+  fps_limit: 10           # Procesar 10 frames por segundo
+  skip_frames: 2          # Procesar 1 de cada 3 frames
+  resolution_scale: 1.0   # Factor de escala (1.0 = original)
+
+# Registro y exportación
+logging:
+  level: "INFO"
+  save_detections: true
+  save_images: false      # No guardar imágenes por defecto (privacidad)
+  retention_days: 90
+
+export:
+  csv:
+    enabled: true
+    interval_minutes: 60  # Exportar cada hora
+    path: "exports/detections_{date}.csv"
+
+  dashboard:
+    enabled: true
+    refresh_seconds: 5
+
+  mqtt:
+    enabled: true
+    topic_prefix: "ppe_detection"
+    qos: 1
+
+  webhook:
+    enabled: true
+    retry_attempts: 3

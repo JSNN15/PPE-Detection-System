@@ -1,0 +1,120 @@
+# Configuración de Cámaras IP
+# Para sistema de detección de EPP
+
+cameras:
+  # Ejemplo de cámara RTSP (recomendado para producción)
+  - camera_id: "cam_001"
+    name: "Cámara Zona Lixiviación - Entrada"
+    enabled: true
+    zone: "zona_lixiviacion"
+
+    # Conexión
+    protocol: "rtsp"  # rtsp, http, mjpeg
+    host: "192.168.1.100"
+    port: 554
+    path: "/stream1"  # Depende del fabricante
+    username: "admin"
+    password: "${CAM_001_PASSWORD}"  # Usar variable de entorno
+
+    # URL completa se construye como: rtsp://username:password@host:port/path
+    # Ejemplo: rtsp://admin:password@192.168.1.100:554/stream1
+
+    # Configuración
+    fps: 15
+    resolution: "1280x720"
+    reconnect_attempts: 5
+    reconnect_delay_seconds: 10
+
+  # Ejemplo de cámara HTTP/MJPEG (alternativa)
+  - camera_id: "cam_002"
+    name: "Cámara Zona Preparación"
+    enabled: true
+    zone: "zona_preparacion"
+
+    protocol: "http"
+    host: "192.168.1.101"
+    port: 80
+    path: "/video.mjpg"
+    username: "admin"
+    password: "${CAM_002_PASSWORD}"
+
+    fps: 10
+    resolution: "1280x720"
+    reconnect_attempts: 5
+    reconnect_delay_seconds: 10
+
+  # Ejemplo de cámara deshabilitada (para pruebas)
+  - camera_id: "cam_003"
+    name: "Cámara Almacén Químicos"
+    enabled: false
+    zone: "zona_almacen"
+
+    protocol: "rtsp"
+    host: "192.168.1.102"
+    port: 554
+    path: "/h264"
+    username: "admin"
+    password: "${CAM_003_PASSWORD}"
+
+    fps: 15
+    resolution: "1920x1080"
+    reconnect_attempts: 5
+    reconnect_delay_seconds: 10
+
+# Configuración de cámara de prueba (archivo de video o webcam)
+test_camera:
+  enabled: false
+  source: 0  # 0 para webcam, o ruta a archivo de video
+  # source: "/path/to/test_video.mp4"
+
+# Configuración global de cámaras
+global_settings:
+  # Timeout para conexión
+  connection_timeout_seconds: 30
+
+  # Buffer de frames
+  frame_buffer_size: 10
+
+  # Reintentos automáticos
+  auto_reconnect: true
+
+  # Logging de stream
+  log_frame_drops: true
+
+  # Verificación de salud
+  health_check_interval_seconds: 60
+
+# Protocolos soportados y sus puertos por defecto
+supported_protocols:
+  rtsp:
+    default_port: 554
+    description: "RTSP (Real-Time Streaming Protocol) - Recomendado"
+    example_url: "rtsp://username:password@ip:port/path"
+
+  http:
+    default_port: 80
+    description: "HTTP/MJPEG - Alternativa compatible"
+    example_url: "http://username:password@ip:port/path"
+
+  onvif:
+    default_port: 80
+    description: "ONVIF - Estándar de cámaras IP"
+    example_url: "http://ip:port/onvif/device_service"
+
+# Fabricantes comunes y sus rutas típicas
+common_manufacturers:
+  hikvision:
+    rtsp_path: "/Streaming/Channels/101"
+    http_path: "/ISAPI/Streaming/channels/101/picture"
+
+  dahua:
+    rtsp_path: "/cam/realmonitor?channel=1&subtype=0"
+    http_path: "/cgi-bin/snapshot.cgi"
+
+  axis:
+    rtsp_path: "/axis-media/media.amp"
+    http_path: "/axis-cgi/mjpg/video.cgi"
+
+  generic:
+    rtsp_path: "/stream1"
+    http_path: "/video.mjpg"
