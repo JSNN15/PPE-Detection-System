@@ -1,4 +1,6 @@
-# Sistema de Detección de EPP para Planta Química 🏭🔬
+# PPE Detection System 🏭🔬
+
+## Sistema de Detección de EPP para Planta Química
 
 **Sistema profesional de visión artificial para reconocimiento automático de Equipos de Protección Personal (EPP) en plantas de lixiviación química.**
 
@@ -46,8 +48,8 @@ pip o pip3
 
 1. **Clonar el repositorio**
 ```bash
-git clone https://github.com/JSNN15/Test-Gemini-Chat-Bot.git
-cd Test-Gemini-Chat-Bot
+git clone https://github.com/JSNN15/PPE-Detection-System.git
+cd PPE-Detection-System
 ```
 
 2. **Instalar dependencias**
@@ -101,7 +103,7 @@ El proyecto incluye Jupyter Notebooks interactivos para aprendizaje:
 ### 🗂️ Estructura del Proyecto
 
 ```
-Test-Gemini-Chat-Bot/
+PPE-Detection-System/
 ├── config/                     # Configuraciones
 │   ├── ppe_config.yaml        # EPPs a detectar
 │   └── camera_config.yaml     # Cámaras IP
@@ -451,7 +453,7 @@ Este proyecto está bajo la licencia MIT. Ver `LICENSE` para más detalles.
 Para preguntas o problemas:
 
 - 📧 Email: soporte@ppe-detection.com
-- 💬 Issues: [GitHub Issues](https://github.com/JSNN15/Test-Gemini-Chat-Bot/issues)
+- 💬 Issues: [GitHub Issues](https://github.com/JSNN15/PPE-Detection-System/issues)
 - 📚 Docs: [Documentación completa](./PROJECT_PLAN.md)
 
 ---

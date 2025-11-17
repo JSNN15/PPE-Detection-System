@@ -14,8 +14,8 @@
 ### Paso 1: Clonar e instalar
 
 ```bash
-git clone https://github.com/JSNN15/Test-Gemini-Chat-Bot.git
-cd Test-Gemini-Chat-Bot
+git clone https://github.com/JSNN15/PPE-Detection-System.git
+cd PPE-Detection-System
 
 # Instalar dependencias
 pip install -r requirements.txt
@@ -84,8 +84,8 @@ python app/main_opensource.py
 
 ```bash
 # Clonar repositorio
-git clone https://github.com/JSNN15/Test-Gemini-Chat-Bot.git
-cd Test-Gemini-Chat-Bot
+git clone https://github.com/JSNN15/PPE-Detection-System.git
+cd PPE-Detection-System
 
 # Configurar .env
 cp .env.example .env
@@ -124,8 +124,8 @@ docker logs -f ppe-detection
 ### Paso 1: Configurar
 
 ```bash
-git clone https://github.com/JSNN15/Test-Gemini-Chat-Bot.git
-cd Test-Gemini-Chat-Bot
+git clone https://github.com/JSNN15/PPE-Detection-System.git
+cd PPE-Detection-System
 
 cp .env.example .env
 nano .env
@@ -372,9 +372,9 @@ Si usaste Docker Compose:
 
 ¿Problemas? Contacta:
 
-- GitHub Issues: https://github.com/JSNN15/Test-Gemini-Chat-Bot/issues
+- GitHub Issues: https://github.com/JSNN15/PPE-Detection-System/issues
 - Email: soporte@ppe-detection.com
-- Docs: https://github.com/JSNN15/Test-Gemini-Chat-Bot/blob/main/README.md
+- Docs: https://github.com/JSNN15/PPE-Detection-System/blob/main/README.md
 
 ---
 
